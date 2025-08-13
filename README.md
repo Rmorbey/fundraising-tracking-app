@@ -1,3 +1,39 @@
+# This is the start of my personal fundraising tracking app project.
+
+I decided to make an app to help me fundraise for a charity half marathon I'm taking part in in May 2026, the idea behind it is so those who have or are thinking of donating towards my fundraising goal have a single place to view my training data, fundraising data as well as a place that myself and the donators can interact. This is the front-end portion of my app, I am planning on learning how to use figma as well as cursor AI to support me in the process of making this app.
+
+## Features in development
+
+- Display total distance traveled in km since starting to fundraise for run.
+
+- Display last few runs data. 5ks, 10ks, 15ks.
+
+- Display current fundraising amount and goal.
+
+- Link to fundraising page.
+
+- Interactive elements. Possibly a race Russell Game with daily/weekly leaderboard. 90's arcade style.
+
+- Encouragement section. (Host side filtering of posts for offensivelanguage/emjois)
+
+- Message shown on app as well as being sent to my device using free sms service.
+
+- Latests donations as well as showing the target of running 1k per £1 raised up to a max of 25k weekly.
+
+## Features that have been implemented
+
+- Work in progress
+
+## Tickets
+
+- Make a frontend repo outlining process, features and tickets.
+
+- Use figma to desighn what the layout and look of the app is going to be both on browser and mobile.
+
+- Use cursor and figma to make CSS HTML styling for the apps layout. Use the MCP tools.
+
+- Use cursor to build frontend react components. (Single page or multiple pages layout?)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
