@@ -1,0 +1,535 @@
+/* Recent Activities Page Styles */
+.recent-activities-page {
+  min-height: 100vh;
+  background: #000000; /* 60% - Black as primary background */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Proxima Nova', sans-serif;
+}
+
+/* Navigation Header */
+.activities-nav {
+  background: linear-gradient(180deg, #37322E 0%, #2A2521 100%);
+  border-bottom: 2px solid #F25C05;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.back-button {
+  background: #F25C05;
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(242, 92, 5, 0.3);
+  box-shadow: 0 4px 12px rgba(242, 92, 5, 0.2);
+  z-index: 1;
+}
+
+.back-button:hover {
+  background: linear-gradient(135deg, #F25C05 0%, #FF6B1A 100%);
+  border-color: rgba(242, 92, 5, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(242, 92, 5, 0.3);
+}
+
+.nav-title {
+  color: #FFFFFF;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.5px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Mobile Navigation - Keep gap and side-by-side layout */
+@media (max-width: 767px) {
+  .activities-nav {
+    justify-content: flex-start;
+    gap: 20px;
+  }
+  
+  .nav-title {
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
+    text-align: left;
+  }
+}
+
+/* Header Section */
+.page-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 12px;
+  color: #FFFFFF; /* 10% - White */
+  letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  opacity: 1;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Main Content - Three Columns */
+.activities-main {
+  display: flex;
+  gap: 24px;
+  padding: 20px;
+  flex: 1;
+  justify-content: center;
+  min-height: 720px;
+}
+
+.activity-column {
+  flex: 1;
+  max-width: 414px;
+  height: 720px;
+  display: flex;
+  flex-direction: column;
+  background: #000000; /* 60% - Black */
+  border: 1px solid #F25C05; /* 30% - Orange */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Column Headers */
+.column-header {
+  text-align: center;
+  padding: 18px;
+  background: #F25C05; /* 30% - Orange */
+  border-radius: 16px 16px 0 0;
+  color: white;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.15);
+}
+
+.column-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+  color: white;
+}
+
+.column-subtitle {
+  font-size: 0.9rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+}
+
+/* Column Content Container */
+.column-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #f25c05 #37322E ;
+  background: #37322E; /* Activity item background */
+}
+
+/* Custom Scrollbar Styling for Column Content */
+.column-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.column-content::-webkit-scrollbar-track {
+  background: #000000; /* 60% - Black */
+  border-radius: 999px;
+}
+
+.column-content::-webkit-scrollbar-thumb {
+  background: #F25C05; /* 30% - Orange */
+  border-radius: 999px;
+  border: 2px solid #000000;
+}
+
+.column-content::-webkit-scrollbar-thumb:hover {
+  background: #FF6B1A; /* Lighter orange on hover */
+}
+
+/* Activity Items */
+.activity-item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 20px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(242, 92, 5, 0.3); /* 30% - Orange with transparency */
+  width: 100%;
+  background: #524944; /* Activity item box color */
+  border-radius: 12px;
+}
+
+.activity-item:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 20px;
+}
+
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(242, 92, 5, 0.2); /* 30% - Orange with transparency */
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.activity-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #FFFFFF; /* 10% - White */
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.activity-date {
+  font-size: 0.85rem;
+  color: #000000; /* 60% - Black */
+  font-weight: 700;
+  background-color: #F25C05; /* 30% - Orange */
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #F25C05;
+}
+
+/* Card Base */
+.run-map-section,
+.run-data-section,
+.message-section,
+.encouragement-section,
+.spotify-section {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1px solid #F25C05; /* 30% - Orange */
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+}
+
+/* Run Map Section */
+.run-map-section {
+  background-color: #000000; /* 60% - Black */
+  padding: 16px 16px 18px;
+  min-height: 140px;
+}
+
+.section-label {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #FFFFFF; /* 10% - White */
+  text-align: left;
+  margin-bottom: 12px;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.map-placeholder {
+  text-align: center;
+  color: #f25c05; /* 30% - Orange */
+  width: 100%;
+}
+
+.map-icon {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.map-placeholder p {
+  font-size: 0.95rem;
+  color: #F25C05; /* 30% - Orange */
+}
+
+/* Run Data Section */
+.run-data-section {
+  background: #F25C05; /* 30% - Orange */
+  border-color: #F25C05;
+  padding: 16px 16px 14px;
+  min-height: 72px;
+}
+
+.data-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 14px;
+  width: 100%;
+}
+
+.data-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: #000000; /* 60% - Black */
+}
+
+.data-label {
+  font-weight: 700;
+  color: #000000; /* 60% - Black */
+  font-size: 0.9rem;
+}
+
+.data-value {
+  font-weight: 800;
+  color: #000000; /* 60% - Black */
+  font-size: 0.95rem;
+}
+
+/* Message Section - Activity Media */
+.message-section {
+  background-color: #000000; /* 60% - Black */
+  padding: 16px;
+  min-height: 120px;
+}
+
+.media-content {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 20px;
+  border: 2px dashed rgba(242, 92, 5, 0.4); /* 30% - Orange with transparency */
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.3); /* 60% - Black with transparency */
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.media-placeholder:hover {
+  border-color: rgba(242, 92, 5, 0.7); /* 30% - Orange with more opacity */
+  background: rgba(0, 0, 0, 0.5); /* 60% - Black with more opacity */
+}
+
+.media-icon {
+  font-size: 2.2rem;
+  margin-bottom: 6px;
+}
+
+.media-text {
+  font-size: 0.95rem;
+  color: #F25C05; /* 30% - Orange */
+  font-weight: 700;
+}
+
+/* Words of Encouragement Section */
+.encouragement-section {
+  background-color: #000000; /* 60% - Black */
+  padding: 16px 16px 12px;
+  min-height: 120px;
+}
+
+.encouragement-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.encouragement-content p {
+  font-size: 0.95rem;
+  color: #FFFFFF; /* 10% - White */
+  line-height: 1.5;
+  font-style: italic;
+  margin: 0;
+  padding-left: 12px;
+  border-left: 3px solid #F25C05; /* 30% - Orange */
+}
+
+/* Spotify Album Section */
+.spotify-section {
+  background: #F25C05; /* 30% - Orange */
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 16px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.spotify-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(500px 200px at -10% -20%, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 60%);
+  pointer-events: none;
+}
+
+.spotify-section .section-label {
+  color: white;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.spotify-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.album-cover {
+  display: flex;
+  justify-content: center;
+  width: auto;
+}
+
+.album-placeholder {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: white;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.album-info {
+  text-align: left;
+  color: white;
+  width: 100%;
+}
+
+.album-title {
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 0 0 2px 0;
+  color: white;
+}
+
+.artist-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 0 0 2px 0;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.album-description {
+  font-size: 0.85rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+}
+
+.spotify-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.spotify-play-btn,
+.spotify-save-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.spotify-play-btn {
+  background-color: #ffffff;
+  color: #1DB954;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.spotify-play-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.spotify-save-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.spotify-save-btn:hover {
+  transform: translateY(-1px);
+  background-color: rgba(255, 255, 255, 0.28);
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .activities-main {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    min-height: auto;
+  }
+  
+  .activity-column {
+    max-width: 100%;
+    height: auto;
+    max-height: 720px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title { font-size: 2.4rem; }
+  .page-subtitle { font-size: 1.05rem; }
+  .activities-main { padding: 20px; }
+  .section-label { font-size: 1.05rem; }
+  .column-title { font-size: 1.15rem; }
+  .column-subtitle { font-size: 0.85rem; }
+  .activity-title { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .page-title { font-size: 2rem; }
+  .page-subtitle { font-size: 0.95rem; }
+  .column-content { padding: 16px; }
+  .run-map-section,
+  .message-section,
+  .encouragement-section,
+  .spotify-section { padding: 12px; }
+  .section-label { font-size: 0.95rem; }
+  .nav-title { font-size: 1.4rem; }
+  .column-title { font-size: 1.05rem; }
+  .activity-title { font-size: 0.95rem; }
+  .spotify-actions { gap: 8px; }
+}
