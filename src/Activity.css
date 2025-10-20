@@ -2,10 +2,9 @@
 .activity-item {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   margin-bottom: 28px;
-  padding: 20px;
-  padding-bottom: 32px;
+  padding: 20px 20px 12px 20px;
   border-bottom: 1px solid rgba(242, 92, 5, 0.3); /* 30% - Orange with transparency */
   width: 100%;
   background: #524944; /* Activity item box color */
@@ -15,35 +14,35 @@
 .activity-item:last-child {
   margin-bottom: 0;
   border-bottom: none;
-  padding-bottom: 20px;
+  padding-bottom: 12px;
 }
 
-.activity-header {
+.activity-header-container {
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(242, 92, 5, 0.3);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(242, 92, 5, 0.2); /* 30% - Orange with transparency */
-  flex-shrink: 0;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .activity-title {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #FFFFFF; /* 10% - White */
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #F25C05;
   margin: 0;
-  letter-spacing: 0.2px;
 }
 
 .activity-date {
+  color: #F25C05;
   font-size: 0.85rem;
-  color: #000000; /* 60% - Black */
-  font-weight: 700;
-  background-color: #F25C05; /* 30% - Orange */
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid #F25C05;
+  font-weight: 600;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
 }
 
 /* Card Base */
@@ -77,10 +76,41 @@
   letter-spacing: 0.6px;
 }
 
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.activity-map {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  border: none !important;
+}
+
+/* Override any Leaflet map borders */
+.activity-map .leaflet-container {
+  border: none !important;
+  outline: none !important;
+}
+
+.activity-map .leaflet-tile-container {
+  border: none !important;
+}
+
+
 .map-placeholder {
   text-align: center;
   color: #f25c05; /* 30% - Orange */
   width: 100%;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .map-icon {
@@ -376,4 +406,333 @@
   .spotify-actions {
     gap: 8px;
   }
+}
+
+/* Description Section */
+/* Description Container */
+.description-container {
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.description-item {
+  background: #261a1a;
+  border: 1px solid rgba(242, 92, 5, 0.3);
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  text-align: center;
+}
+
+.description-item strong {
+  color: #F25C05;
+  font-weight: 700;
+}
+
+.description-item em {
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic;
+}
+
+/* Photos Section */
+.photos-section {
+  background-color: #000000; /* 60% - Black */
+  padding: 16px;
+  min-height: 120px;
+}
+
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.photo-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border: 2px solid rgba(242, 92, 5, 0.3);
+}
+
+.photo-item:hover {
+  transform: scale(1.05);
+  border-color: rgba(242, 92, 5, 0.6);
+}
+
+.photo-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.photo-item:hover .photo-overlay {
+  opacity: 1;
+}
+
+.photo-icon {
+  color: #F25C05;
+  font-size: 1.5rem;
+}
+
+/* Comments Container */
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.comment-item {
+  background: #261a1a;
+  border: 1px solid rgba(242, 92, 5, 0.3);
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.comment-author {
+  color: #F25C05;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.comment-date {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+}
+
+.comment-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Music Widget Container */
+.music-widget-container {
+  margin-bottom: 12px;
+  width: 100%;
+  display: block;
+}
+
+.deezer-widget {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  line-height: 0; /* Remove extra space */
+  display: block;
+  transition: opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+.deezer-widget:not(.active) {
+  opacity: 0.7;
+}
+
+.deezer-widget.active {
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+.deezer-widget iframe {
+  border-radius: 8px;
+  display: block; /* Remove inline spacing */
+  width: 100% !important;
+  height: 200px;
+  border: none;
+  max-width: none !important;
+}
+
+/* Force Deezer widget to fill full width */
+.deezer-widget * {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Additional overrides for Deezer widget width */
+.deezer-widget iframe[src*="deezer.com"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+}
+
+/* Force the widget container to expand */
+.music-widget-container .deezer-widget {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+}
+
+/* Override any parent container constraints */
+.activity-item .music-widget-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+}
+
+/* Ensure the widget fills the full column width */
+.music-widget-container {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0 0 12px 0;
+}
+
+/* Deezer Refresh Button */
+.deezer-refresh-btn {
+  background: #261a1a;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(242, 92, 5, 0.3);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 6px auto 0 auto;
+  width: fit-content;
+  display: block;
+}
+
+.deezer-refresh-btn:hover {
+  background: #2d1f1f;
+  border-color: rgba(242, 92, 5, 0.5);
+  color: rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+}
+
+.deezer-refresh-btn:active {
+  transform: translateY(0);
+}
+
+/* Photo Modal */
+.photo-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.photo-modal {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #F25C05;
+}
+
+.photo-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #F25C05;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.photo-modal-close:hover {
+  background: rgba(242, 92, 5, 0.8);
+  color: white;
+}
+
+.photo-modal img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Responsive Design for New Sections */
+@media (max-width: 768px) {
+  .photos-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 8px;
+  }
+
+  .photo-item img {
+    height: 100px;
+  }
+
+  .comment-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .music-content {
+    gap: 10px;
+  }
+
+  .deezer-widget iframe {
+    height: 150px;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .photos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .photo-modal {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+
+  .photo-modal-close {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+
 }

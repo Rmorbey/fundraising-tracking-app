@@ -47,6 +47,13 @@
   position: relative;
 }
 
+.sparkle {
+  color: #FFD700 !important;
+  font-weight: 700;
+  animation: sparkle 2s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
 .latest-donation::after {
   content: '✨';
   position: absolute;
@@ -221,6 +228,38 @@
   color: rgba(242, 92, 5, 0.9);
 }
 
+/* Loading and Error Indicators */
+.footer-loading {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  z-index: 10;
+}
+
+.loading-dot {
+  color: #F25C05;
+  font-size: 1.2rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.footer-error {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  z-index: 10;
+}
+
+.error-indicator {
+  color: #F44336;
+  font-size: 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .activities-footer { 
@@ -233,5 +272,11 @@
   
   .progress-label { 
     font-size: 1rem; 
+  }
+
+  .footer-loading,
+  .footer-error {
+    top: 3px;
+    right: 8px;
   }
 }
