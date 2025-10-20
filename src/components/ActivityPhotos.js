@@ -1,4 +1,5 @@
 import React, { useState, memo } from 'react';
+import LazyImage from './LazyImage';
 
 const ActivityPhotos = memo(function ActivityPhotos({ photos }) {
   const [showPhotoModal, setShowPhotoModal] = useState(false);
@@ -39,7 +40,7 @@ const ActivityPhotos = memo(function ActivityPhotos({ photos }) {
         }
         
         return (
-          <img
+          <LazyImage
             key={index}
             src={photoUrl}
             alt={`Activity ${index + 1}`}

@@ -129,20 +129,28 @@ function animateRoute(routePoints, mapData, map, animationRef) {
             return;
         }
         
-        // Animation controls
+        // Animation controls with performance optimization
         let currentIndex = 0;
         const totalPoints = routePoints.length;
-        const animationSpeed = Math.max(10, Math.floor(totalPoints / 100));
+        // Optimize animation speed based on route complexity
+        const animationSpeed = Math.max(15, Math.min(50, Math.floor(totalPoints / 80)));
         
-        // Animation function
+        // For very long routes, sample points to improve performance
+        const shouldSample = totalPoints > 1000;
+        const sampleRate = shouldSample ? Math.ceil(totalPoints / 500) : 1;
+        
+        // Animation function with performance optimizations
         function animateStep() {
             try {
                 if (currentIndex < totalPoints) {
-                    // Add next point to animated route
-                    const currentPoints = routePoints.slice(0, currentIndex + 1);
-                    animatedRoute.setLatLngs(currentPoints);
+                    // For performance, only update every few frames for long routes
+                    if (currentIndex % sampleRate === 0 || !shouldSample) {
+                        // Add next point to animated route
+                        const currentPoints = routePoints.slice(0, currentIndex + 1);
+                        animatedRoute.setLatLngs(currentPoints);
+                    }
                     
-                    // Move the dot to current position
+                    // Always move the dot for smooth animation
                     movingDot.setLatLng(routePoints[currentIndex]);
                     
                     currentIndex++;
@@ -410,9 +418,17 @@ const ActivityMap = memo(function ActivityMap({ activity, apiKey }) {
 
   // Initialize map when component mounts and has real data
   useEffect(() => {
-    if (activity.map?.polyline && !mapInitialized && window.L && (apiKey || process.env.REACT_APP_STRAVA_API_KEY)) {
-      initializeMap();
-    }
+    // Wait for Leaflet to be available
+    const checkLeaflet = () => {
+      if (window.L && activity.map?.polyline && !mapInitialized && (apiKey || process.env.REACT_APP_STRAVA_API_KEY)) {
+        initializeMap();
+      } else if (!window.L) {
+        // Retry after a short delay if Leaflet isn't loaded yet
+        setTimeout(checkLeaflet, 100);
+      }
+    };
+    
+    checkLeaflet();
   }, [activity.map, mapInitialized, initializeMap, apiKey]);
 
   // Cleanup animation when component unmounts
@@ -428,16 +444,60 @@ const ActivityMap = memo(function ActivityMap({ activity, apiKey }) {
 
   if (!activity.map?.polyline) {
     return (
-      <div className="map-placeholder">
-        <div className="map-icon">🗺️</div>
-        <p>Interactive route map</p>
+      <div className="map-placeholder" style={{
+        height: '300px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#2a2a2a',
+        borderRadius: '8px',
+        color: '#666'
+      }}>
+        <div className="map-icon" style={{ fontSize: '2rem', marginBottom: '10px' }}>🗺️</div>
+        <p>No GPS data available for this activity</p>
+      </div>
+    );
+  }
+
+  if (!window.L) {
+    return (
+      <div className="map-placeholder" style={{
+        height: '300px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#2a2a2a',
+        borderRadius: '8px',
+        color: '#666'
+      }}>
+        <div className="map-icon" style={{ fontSize: '2rem', marginBottom: '10px' }}>🗺️</div>
+        <p>Loading map...</p>
       </div>
     );
   }
 
   return (
-    <div className="map-container">
-      <div ref={mapRef} className="activity-map"></div>
+    <div 
+      className="map-container" 
+      style={{ 
+        height: '300px', 
+        width: '100%',
+        backgroundColor: '#2a2a2a',
+        borderRadius: '8px',
+        overflow: 'hidden'
+      }}
+    >
+      <div 
+        ref={mapRef} 
+        className="activity-map"
+        style={{ 
+          height: '100%', 
+          width: '100%',
+          minHeight: '300px'
+        }}
+      ></div>
     </div>
   );
 });
