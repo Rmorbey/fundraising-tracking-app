@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, memo, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import './LandingPage.css';
 import FundraisingFooter from './FundraisingFooter';
-import { stravaAPI } from './services/apiService';
+import { useStravaActivities } from './hooks/useStravaActivities';
 
-function LandingPage() {
-  const [stravaActivities, setStravaActivities] = useState([]);
+const LandingPage = memo(function LandingPage() {
+  const { activities: stravaActivities } = useStravaActivities();
   const [totalDistance, setTotalDistance] = useState({ running: 0, cycling: 0, total: 0 });
 
   const calculateTotalDistance = (activities) => {
@@ -41,20 +41,12 @@ function LandingPage() {
     });
   };
 
-  const fetchStravaActivities = useCallback(async () => {
-    try {
-      // Fetch all activities to get accurate totals
-      const data = await stravaAPI.getFeed();
-      setStravaActivities(data.activities || []);
-      calculateTotalDistance(data.activities || []);
-    } catch (err) {
-      console.error('Error fetching Strava activities:', err);
-    }
-  }, []);
-
+  // Calculate total distance when activities change
   useEffect(() => {
-    fetchStravaActivities();
-  }, [fetchStravaActivities]);
+    if (stravaActivities.length > 0) {
+      calculateTotalDistance(stravaActivities);
+    }
+  }, [stravaActivities]);
 
   const formatDistance = (distance) => {
     return distance.toFixed(1);
@@ -128,8 +120,8 @@ function LandingPage() {
     return `${diffDays - 1} days ago`;
   };
 
-  // Get the 3 most recent activities for display
-  const recentActivities = stravaActivities.slice(0, 3);
+  // Get the 3 most recent activities for display - memoized for performance
+  const recentActivities = useMemo(() => stravaActivities.slice(0, 3), [stravaActivities]);
 
   return (
     <>
@@ -176,6 +168,6 @@ function LandingPage() {
       <FundraisingFooter />
     </>
   );
-}
+});
 
 export default LandingPage;

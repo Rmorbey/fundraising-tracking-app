@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { fundraisingAPI, apiUtils } from './services/apiService';
 import './FundraisingFooter.css';
 
-const FundraisingFooter = () => {
+const FundraisingFooter = memo(function FundraisingFooter() {
   const [fundraisingData, setFundraisingData] = useState(null);
   const [donations, setDonations] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -173,6 +173,6 @@ const FundraisingFooter = () => {
       </div>
     </footer>
   );
-};
+});
 
 export default FundraisingFooter;

@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { memo, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import './RecentActivities.css';
 import FundraisingFooter from './FundraisingFooter';
 import Activity from './Activity';
-import { stravaAPI } from './services/apiService';
+import { useStravaActivities } from './hooks/useStravaActivities';
 
-function RecentActivities() {
-  const [stravaActivities, setStravaActivities] = useState([]);
-
-  useEffect(() => {
-    fetchStravaActivities();
-  }, []);
-
-  const fetchStravaActivities = async () => {
-    try {
-      const data = await stravaAPI.getFeed(100);
-      setStravaActivities(data.activities || []);
-    } catch (err) {
-      console.error('Error fetching Strava activities:', err);
-    }
-  };
+const RecentActivities = memo(function RecentActivities() {
+  const { activities: stravaActivities } = useStravaActivities(100);
 
   const categorizeActivities = (activities) => {
     const runs5k10k = [];
@@ -116,7 +103,11 @@ function RecentActivities() {
     return null; // We have real music data, no need for Spotify fallback
   };
 
-  const { runs5k10k, runs10kPlus, bikeRides } = categorizeActivities(stravaActivities);
+  // Memoize activity categorization for performance
+  const { runs5k10k, runs10kPlus, bikeRides } = useMemo(() => 
+    categorizeActivities(stravaActivities), 
+    [stravaActivities]
+  );
 
   return (
     <div className="recent-activities-page">
@@ -201,6 +192,6 @@ function RecentActivities() {
       <FundraisingFooter />
     </div>
   );
-}
+});
 
 export default RecentActivities;

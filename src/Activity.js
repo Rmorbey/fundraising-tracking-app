@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback, memo } from 'react';
 import './Activity.css';
 import * as polyline from 'polyline-encoded';
 
@@ -213,7 +213,7 @@ function animateRoute(routePoints, mapData, map, animationRef) {
     }
 }
 
-function Activity({ activity, isRealData = false, apiKey }) {
+const Activity = memo(function Activity({ activity, isRealData = false, apiKey }) {
   const mapRef = useRef(null);
   const [mapInitialized, setMapInitialized] = useState(false);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
@@ -758,6 +758,6 @@ function Activity({ activity, isRealData = false, apiKey }) {
       )}
     </div>
   );
-}
+});
 
 export default Activity;
