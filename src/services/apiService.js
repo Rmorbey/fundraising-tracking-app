@@ -108,7 +108,7 @@ class StravaAPI {
     try {
       const params = limit ? { limit } : {};
       const data = await this.apiService.getStravaFeed(params);
-      console.log('API response - Activities count:', data.activities?.length || 0);
+      // console.log('API response - Activities count:', data.activities?.length || 0);
       return data;
     } catch (error) {
       console.error('Error fetching Strava activities:', error);

@@ -553,23 +553,13 @@
   overflow: hidden;
   line-height: 0; /* Remove extra space */
   display: block;
-  transition: opacity 0.3s ease, box-shadow 0.3s ease;
-}
-
-.deezer-widget:not(.active) {
-  opacity: 0.7;
-}
-
-.deezer-widget.active {
-  opacity: 1;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
 }
 
 .deezer-widget iframe {
   border-radius: 8px;
   display: block; /* Remove inline spacing */
   width: 100% !important;
-  height: 200px;
+  height: 300px;
   border: none;
   max-width: none !important;
 }

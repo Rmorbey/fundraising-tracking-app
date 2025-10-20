@@ -92,7 +92,7 @@
 .activities-main {
   display: flex;
   gap: 24px;
-  padding: 20px;
+  padding: 20px 20px;
   flex: 1;
   justify-content: center;
   min-height: 720px;
@@ -100,7 +100,7 @@
 
 .activity-column {
   flex: 1;
-  max-width: 414px;
+  max-width: 600px;
   height: 720px;
   display: flex;
   flex-direction: column;

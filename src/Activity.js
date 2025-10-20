@@ -2,55 +2,6 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import './Activity.css';
 import * as polyline from 'polyline-encoded';
 
-// Global active widget state
-let globalActiveWidget = null;
-
-// Single Active Deezer Widget Management
-const useSingleActiveDeezerWidget = () => {
-  const activeWidgetRef = useRef(null);
-  const [, forceUpdate] = useState(0);
-
-  useEffect(() => {
-    const handleWidgetClick = (event) => {
-      // Check if click is on a Deezer widget iframe or its container
-      const iframe = event.target.closest('iframe[src*="widget.deezer.com"]');
-      const widgetContainer = event.target.closest('.deezer-widget');
-      
-      if (iframe || widgetContainer) {
-        
-        // Find the iframe if we clicked on the container
-        const targetIframe = iframe || widgetContainer?.querySelector('iframe[src*="widget.deezer.com"]');
-        
-        if (targetIframe) {
-          // Pause the previously active widget
-          if (globalActiveWidget && globalActiveWidget !== targetIframe) {
-            try {
-              globalActiveWidget.contentWindow?.postMessage('pause', '*');
-            } catch (error) {
-              console.warn('Could not pause previous widget:', error);
-            }
-          }
-          
-          // Set new active widget (store both iframe and container)
-          globalActiveWidget = targetIframe;
-          activeWidgetRef.current = widgetContainer;
-          
-          // Force re-render to update CSS classes
-          forceUpdate(prev => prev + 1);
-        }
-      }
-    };
-
-    // Listen for clicks on Deezer widgets
-    document.addEventListener('click', handleWidgetClick);
-
-    return () => {
-      document.removeEventListener('click', handleWidgetClick);
-    };
-  }, []);
-
-  return activeWidgetRef.current;
-};
 
 
 // Deezer Widget Refresh and Error Handling
@@ -270,8 +221,6 @@ function Activity({ activity, isRealData = false, apiKey }) {
   const animationRef = useRef(null);
   const musicWidgetRef = useRef(null);
 
-  // Single active Deezer widget management
-  const activeWidget = useSingleActiveDeezerWidget();
   
   // Deezer widget refresh and error handling
   const { widgetKey, refreshWidget } = useDeezerWidgetRefresh(activity);
@@ -774,7 +723,7 @@ function Activity({ activity, isRealData = false, apiKey }) {
           <div className="music-widget-container">
             <div 
               ref={musicWidgetRef}
-              className={`deezer-widget ${activeWidget === musicWidgetRef.current ? 'active' : ''}`}
+              className="deezer-widget"
               key={widgetKey}
             >
               <div dangerouslySetInnerHTML={{ __html: activity.music.widget_html }} />

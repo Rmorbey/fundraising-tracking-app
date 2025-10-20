@@ -14,25 +14,25 @@ function LandingPage() {
     let runCount = 0;
     let rideCount = 0;
 
-    console.log('=== DISTANCE CALCULATION DEBUG ===');
-    console.log('Total activities to process:', activities.length);
+    // console.log('=== DISTANCE CALCULATION DEBUG ===');
+    // console.log('Total activities to process:', activities.length);
 
     activities.forEach((activity, index) => {
       if (activity.type === 'Run' && activity.distance_km) {
         runningTotal += activity.distance_km;
         runCount++;
-        console.log(`Run ${runCount}: ${activity.name} - ${activity.distance_km}km (${activity.date})`);
+        // console.log(`Run ${runCount}: ${activity.name} - ${activity.distance_km}km (${activity.date})`);
       } else if (activity.type === 'Ride' && activity.distance_km) {
         cyclingTotal += activity.distance_km;
         rideCount++;
-        console.log(`Ride ${rideCount}: ${activity.name} - ${activity.distance_km}km (${activity.date})`);
+        // console.log(`Ride ${rideCount}: ${activity.name} - ${activity.distance_km}km (${activity.date})`);
       }
     });
 
-    console.log('Running total:', runningTotal, 'km from', runCount, 'runs');
-    console.log('Cycling total:', cyclingTotal, 'km from', rideCount, 'rides');
-    console.log('Grand total:', runningTotal + cyclingTotal, 'km');
-    console.log('=== END DISTANCE CALCULATION DEBUG ===');
+    // console.log('Running total:', runningTotal, 'km from', runCount, 'runs');
+    // console.log('Cycling total:', cyclingTotal, 'km from', rideCount, 'rides');
+    // console.log('Grand total:', runningTotal + cyclingTotal, 'km');
+    // console.log('=== END DISTANCE CALCULATION DEBUG ===');
 
     setTotalDistance({
       running: runningTotal,
@@ -79,17 +79,17 @@ function LandingPage() {
     // Try different date fields that might exist
     const dateString = activity.start_time || activity.date || activity.start_date;
     
-    console.log('=== DATE PARSING DEBUG ===');
-    console.log('Activity:', activity.name);
-    console.log('Available date fields:', {
-      start_time: activity.start_time,
-      date: activity.date,
-      start_date: activity.start_date
-    });
-    console.log('Selected dateString:', dateString);
+    // console.log('=== DATE PARSING DEBUG ===');
+    // console.log('Activity:', activity.name);
+    // console.log('Available date fields:', {
+    //   start_time: activity.start_time,
+    //   date: activity.date,
+    //   start_date: activity.start_date
+    // });
+    // console.log('Selected dateString:', dateString);
     
     if (!dateString) {
-      console.warn('No date found for activity:', activity);
+      // console.warn('No date found for activity:', activity);
       return 'Unknown date';
     }
     
@@ -111,12 +111,12 @@ function LandingPage() {
       activityDate = new Date(dateString);
     }
     
-    console.log('Parsed activityDate:', activityDate);
-    console.log('Is valid date:', !isNaN(activityDate.getTime()));
-    console.log('=== END DATE PARSING DEBUG ===');
+    // console.log('Parsed activityDate:', activityDate);
+    // console.log('Is valid date:', !isNaN(activityDate.getTime()));
+    // console.log('=== END DATE PARSING DEBUG ===');
     
     if (isNaN(activityDate.getTime())) {
-      console.warn('Invalid date for activity:', activity, 'dateString:', dateString);
+      // console.warn('Invalid date for activity:', activity, 'dateString:', dateString);
       return 'Invalid date';
     }
     
@@ -135,7 +135,7 @@ function LandingPage() {
     <>
       {/* Header Section */}
       <header className="header">
-        <h1 className="main-title">Fundraising Tracking App</h1>
+        <h1 className="main-title">Ready & Raising</h1>
         <p className="description">
           The aim of this app is to allow people who have donated or are thinking of donating to see the training progress as well as the current fundraising total all in one place.
         </p>
